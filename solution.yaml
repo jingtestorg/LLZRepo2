@@ -1,0 +1,10 @@
+apiVersion: solution.sap/v1
+kind: Solution
+
+metadata:
+  name: morning-greeting-ff1fd
+  version: 1.0.1
+  description: AI agent that sends a warm, personalized hello greeting to users every morning at 8:00 AM.
+
+assets:
+  - ref: ./assets/morning-greeting-agent/asset.yaml

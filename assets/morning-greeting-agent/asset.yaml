@@ -1,0 +1,41 @@
+apiVersion: asset.sap/v1
+kind: Asset
+type: agent
+
+metadata:
+  name: morning-greeting-agent
+  version: 1.0.0
+
+agentCard:
+  name: Morning Greeting Agent
+  version: 1.0.0
+  description: An AI agent that sends a warm, personalized hello greeting to users every morning at 8:00 AM to boost morale and encourage an on-time productive start to the day.
+
+provides:
+  apis:
+    - name: morning-greeting-agent
+      kind: a2a
+      ordId: customer.build:apiResource:morning-greeting-ff1fd.morning-greeting-agent:v1
+
+container:
+  buildPath: .
+  port: 5000
+
+probes:
+  startup:
+    path: /.well-known/agent.json
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 18
+  liveness:
+    path: /.well-known/agent.json
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    path: /.well-known/agent.json
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
